@@ -15,6 +15,10 @@ export default function Index() {
           <h1>
             ホーム
           </h1>
+          <Link href="/message">
+            サーバ応答
+          </Link>
+          <p />
           <Link href="/api/auth/logout">
             ログアウト
           </Link>
