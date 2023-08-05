@@ -1,3 +1,4 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 import { getAccessToken, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import axios, { isAxiosError } from 'axios';
 
@@ -5,7 +6,7 @@ export interface Message {
   message: string;
 }
 
-export default withApiAuthRequired(async (req, res) => {
+export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiResponse) => {
   const url = process.env.MESSAGE_URL;
 
   if (!url) {
