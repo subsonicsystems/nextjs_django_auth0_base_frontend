@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import Head from 'next/head';
 import {
-  AppBar, IconButton, Toolbar, Typography,
+  AppBar, Box, IconButton, Toolbar, Typography,
 } from '@mui/material';
 import { AccountCircle, Menu as MenuIcon } from '@mui/icons-material';
 
@@ -35,7 +35,9 @@ export default function Layout({ children }: { children: ReactNode }) {
         </Toolbar>
       </AppBar>
       <main>
-        {children}
+        <Box p={2}>
+          {children}
+        </Box>
       </main>
     </>
   );
