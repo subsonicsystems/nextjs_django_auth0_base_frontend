@@ -11,9 +11,9 @@ export default function LoggedOut() {
       </Head>
       <main>
         <div>
-        <span>
-          ログアウトしました。
-        </span>
+          <span>
+            ログアウトしました。
+          </span>
           <p />
           <Link href="/api/auth/login">
             ログイン
