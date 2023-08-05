@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import axios from 'axios';
+import Layout from '@/components/layout';
 import { Message } from '@/pages/api/message';
 
 export default function Message() {
@@ -19,26 +19,19 @@ export default function Message() {
   }, []);
 
   return (
-    <>
-      <Head>
-        <title>
-          Nextjs Django Auth0 Base
-        </title>
-      </Head>
-      <main>
+    <Layout>
+      <div>
+        <h1>
+          サーバ応答
+        </h1>
         <div>
-          <h1>
-            サーバ応答
-          </h1>
-          <div>
-            {message}
-          </div>
-          <Link href="/">
-            ホーム
-          </Link>
+          {message}
         </div>
-      </main>
-    </>
+        <Link href="/">
+          ホーム
+        </Link>
+      </div>
+    </Layout>
   );
 }
 
