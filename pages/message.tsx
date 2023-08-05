@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import {
+  Box, Card, CardContent, Typography,
+} from '@mui/material';
 import axios from 'axios';
 import Layout from '@/components/layout';
 import { Message } from '@/pages/api/message';
@@ -21,15 +24,22 @@ export default function Message() {
   return (
     <Layout>
       <div>
-        <h1>
+        <Typography
+          variant="h6"
+          gutterBottom
+        >
           サーバ応答
-        </h1>
-        <div>
-          {message}
-        </div>
-        <Link href="/">
-          ホーム
-        </Link>
+        </Typography>
+        <Card sx={{ maxWidth: 600 }}>
+          <CardContent>
+            {message}
+          </CardContent>
+        </Card>
+        <Box mt={2}>
+          <Link href="/">
+            ホーム
+          </Link>
+        </Box>
       </div>
     </Layout>
   );
