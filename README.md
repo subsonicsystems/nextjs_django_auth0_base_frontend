@@ -1,6 +1,6 @@
 # nextjs_django_auth0_base_frontend
 汎用的なWebアプリケーションを作成するプロジェクトです。  
-Next.js / Django / Auth0 / Material UIを組み合わせています。
+Next.js / Django / Auth0 / Material UI / Joy UIを組み合わせています。
 
 このリポジトリはフロントエンドです。  
 バックエンドは  
