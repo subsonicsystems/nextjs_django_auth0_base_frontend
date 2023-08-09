@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import NextLink from 'next/link';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import {
   Box, Card, CardContent, Typography,
 } from '@mui/material';
+import { Link } from '@mui/joy';
 import axios from 'axios';
 import Layout from '@/components/layout';
 import { Message } from '@/pages/api/message';
@@ -36,9 +37,15 @@ export default function Message() {
           </CardContent>
         </Card>
         <Box mt={2}>
-          <Link href="/">
-            ホーム
-          </Link>
+          <NextLink
+            href="/"
+            passHref
+            legacyBehavior
+          >
+            <Link>
+              ホーム
+            </Link>
+          </NextLink>
         </Box>
       </div>
     </Layout>

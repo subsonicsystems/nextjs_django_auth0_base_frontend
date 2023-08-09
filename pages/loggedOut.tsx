@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import Link from 'next/link';
+import NextLink from 'next/link';
+import { Link } from '@mui/joy';
 
 export default function LoggedOut() {
   return (
@@ -15,9 +16,15 @@ export default function LoggedOut() {
             ログアウトしました。
           </span>
           <p />
-          <Link href="/api/auth/login">
-            ログイン
-          </Link>
+          <NextLink
+            href="/api/auth/login"
+            passHref
+            legacyBehavior
+          >
+            <Link>
+              ログイン
+            </Link>
+          </NextLink>
         </div>
       </main>
     </>
