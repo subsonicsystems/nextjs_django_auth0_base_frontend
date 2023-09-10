@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
 import Head from 'next/head';
+import { Typography } from '@mui/joy';
 import {
-  AppBar, Box, IconButton, Toolbar, Typography,
+  AppBar, Box, IconButton, Toolbar,
 } from '@mui/material';
 import { AccountCircle, Menu as MenuIcon } from '@mui/icons-material';
 
@@ -23,7 +24,8 @@ export default function Layout({ children }: { children: ReactNode }) {
             <MenuIcon />
           </IconButton>
           <Typography
-            variant="h6"
+            level="title-lg"
+            textColor="#ffffff"
             component="div"
             sx={{ flexGrow: 1 }}
           >

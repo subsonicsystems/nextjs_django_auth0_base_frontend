@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import NextLink from 'next/link';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import {
-  Box, Card, CardContent, Typography,
+  Box, Card, CardContent,
 } from '@mui/material';
-import { Link } from '@mui/joy';
+import { Link, Typography } from '@mui/joy';
 import axios from 'axios';
 import Layout from '@/components/layout';
 import { Message } from '@/pages/api/message';
@@ -26,7 +26,7 @@ export default function Message() {
     <Layout>
       <div>
         <Typography
-          variant="h6"
+          level="title-md"
           gutterBottom
         >
           サーバ応答
