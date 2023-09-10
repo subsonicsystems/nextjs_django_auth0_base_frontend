@@ -1,7 +1,6 @@
 import NextLink from 'next/link';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
-import { Typography } from '@mui/material';
-import { Link } from '@mui/joy';
+import { Link, Typography } from '@mui/joy';
 import Layout from '@/components/layout';
 
 export default function Index() {
@@ -9,7 +8,7 @@ export default function Index() {
     <Layout>
       <div>
         <Typography
-          variant="h6"
+          level="title-md"
           gutterBottom
         >
           ホーム
