@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import NextLink from 'next/link';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import {
-  Box, Card, CardContent,
-} from '@mui/material';
-import { Link, Typography } from '@mui/joy';
+  Card, CardContent, Link, Typography,
+} from '@mui/joy';
+import { Box } from '@mui/material';
 import axios from 'axios';
 import Layout from '@/components/layout';
 import { Message } from '@/pages/api/message';
