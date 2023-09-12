@@ -7,16 +7,17 @@ import {
   THEME_ID as MATERIAL_THEME_ID,
 } from '@mui/material/styles';
 import { CssVarsProvider as JoyCssVarsProvider, extendTheme as joyExtendTheme } from '@mui/joy/styles';
+import '@fontsource-variable/noto-sans-jp';
 
 const materialTheme = materialExtendTheme({
   typography: {
-    fontFamily: '"Yu Gothic",YuGothic,sans-serif',
+    fontFamily: '"Noto Sans JP Variable",sans-serif',
   },
 });
 
 const joyTheme = joyExtendTheme({
   fontFamily: {
-    body: '"Yu Gothic",YuGothic,sans-serif',
+    body: '"Noto Sans JP Variable",sans-serif',
   },
 });
 
