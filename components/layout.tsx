@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 import Head from 'next/head';
-import { Typography } from '@mui/joy';
+import { IconButton, Typography } from '@mui/joy';
 import {
-  AppBar, Box, IconButton, Toolbar,
+  AppBar, Box, Toolbar,
 } from '@mui/material';
 import { AccountCircle, Menu as MenuIcon } from '@mui/icons-material';
 
@@ -17,9 +17,13 @@ export default function Layout({ children }: { children: ReactNode }) {
       <AppBar position="static">
         <Toolbar>
           <IconButton
-            edge="start"
-            color="inherit"
-            sx={{ mr: 2 }}
+            sx={{
+              mr: 2,
+              color: 'common.white',
+              '&:hover': {
+                backgroundColor: 'primary.500',
+              },
+            }}
           >
             <MenuIcon />
           </IconButton>
@@ -31,7 +35,14 @@ export default function Layout({ children }: { children: ReactNode }) {
           >
             Nextjs Django Auth0 Base
           </Typography>
-          <IconButton color="inherit">
+          <IconButton
+            sx={{
+              color: 'common.white',
+              '&:hover': {
+                backgroundColor: 'primary.500',
+              },
+            }}
+          >
             <AccountCircle />
           </IconButton>
         </Toolbar>
