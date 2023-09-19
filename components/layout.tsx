@@ -1,12 +1,47 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import Head from 'next/head';
-import { IconButton, Typography } from '@mui/joy';
+import { useRouter } from 'next/router';
 import {
-  AppBar, Box, Toolbar,
+  DialogContent,
+  DialogTitle,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ModalClose,
+  Typography,
+} from '@mui/joy';
+import {
+  AppBar,
+  Box,
+  Toolbar,
 } from '@mui/material';
-import { AccountCircle, Menu as MenuIcon } from '@mui/icons-material';
+import {
+  AccountCircle,
+  Menu as MenuIcon,
+} from '@mui/icons-material';
 
 export default function Layout({ children }: { children: ReactNode }) {
+  const router = useRouter();
+
+  const [openMenu, setOpenMenu] = useState(false);
+
+  const clickOpenMenu = () => {
+    setOpenMenu(true);
+  };
+
+  const closeMenu = () => {
+    setOpenMenu(false);
+  };
+
+  const movePage = (url: string) => () => {
+    router.push(url)
+      .then(() => {
+        setOpenMenu(false);
+      });
+  };
+
   return (
     <>
       <Head>
@@ -17,6 +52,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <AppBar position="static">
         <Toolbar>
           <IconButton
+            onClick={clickOpenMenu}
             sx={{
               mr: 2,
               color: 'common.white',
@@ -27,6 +63,34 @@ export default function Layout({ children }: { children: ReactNode }) {
           >
             <MenuIcon />
           </IconButton>
+          <Drawer
+            open={openMenu}
+            onClose={closeMenu}
+            size="sm"
+            sx={{
+              '& .MuiDrawer-backdrop': { backdropFilter: 'none' },
+              '--Drawer-transitionDuration': openMenu ? '0.3s' : 0,
+            }}
+          >
+            <ModalClose />
+            <DialogTitle>
+               &nbsp;
+            </DialogTitle>
+            <DialogContent>
+              <List>
+                <ListItem>
+                  <ListItemButton onClick={movePage('/')}>
+                    ホーム
+                  </ListItemButton>
+                </ListItem>
+                <ListItem>
+                  <ListItemButton onClick={movePage('/message')}>
+                    サーバ応答
+                  </ListItemButton>
+                </ListItem>
+              </List>
+            </DialogContent>
+          </Drawer>
           <Typography
             level="title-lg"
             textColor="#ffffff"
