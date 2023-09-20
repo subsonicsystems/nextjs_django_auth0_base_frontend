@@ -57,6 +57,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               mr: 2,
               color: 'common.white',
               '&:hover': {
+                color: 'common.white',
                 backgroundColor: 'primary.500',
               },
             }}
@@ -103,6 +104,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             sx={{
               color: 'common.white',
               '&:hover': {
+                color: 'common.white',
                 backgroundColor: 'primary.500',
               },
             }}
