@@ -22,16 +22,6 @@ export default function Index() {
             サーバ応答
           </Link>
         </NextLink>
-        <p />
-        <NextLink
-          href="/api/auth/logout"
-          passHref
-          legacyBehavior
-        >
-          <Link>
-            ログアウト
-          </Link>
-        </NextLink>
       </div>
     </Layout>
   );
