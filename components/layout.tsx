@@ -22,10 +22,13 @@ import {
   Menu as MenuIcon,
 } from '@mui/icons-material';
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function Layout({ children }: {
+  children: ReactNode
+}) {
   const router = useRouter();
 
   const [openMenu, setOpenMenu] = useState(false);
+  const [openAccountMenu, setOpenAccountMenu] = useState(false);
 
   const clickOpenMenu = () => {
     setOpenMenu(true);
@@ -35,10 +38,24 @@ export default function Layout({ children }: { children: ReactNode }) {
     setOpenMenu(false);
   };
 
+  const clickOpenAccountMenu = () => {
+    setOpenAccountMenu(true);
+  };
+
+  const closeAccountMenu = () => {
+    setOpenAccountMenu(false);
+  };
+
   const movePage = (url: string) => () => {
     router.push(url)
       .then(() => {
-        setOpenMenu(false);
+        if (openMenu) {
+          setOpenMenu(false);
+        }
+
+        if (openAccountMenu) {
+          setOpenAccountMenu(false);
+        }
       });
   };
 
@@ -75,7 +92,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           >
             <ModalClose />
             <DialogTitle>
-               &nbsp;
+              &nbsp;
             </DialogTitle>
             <DialogContent>
               <List>
@@ -101,6 +118,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             Nextjs Django Auth0 Base
           </Typography>
           <IconButton
+            onClick={clickOpenAccountMenu}
             sx={{
               color: 'common.white',
               '&:hover': {
@@ -111,6 +129,30 @@ export default function Layout({ children }: { children: ReactNode }) {
           >
             <AccountCircle />
           </IconButton>
+          <Drawer
+            open={openAccountMenu}
+            onClose={closeAccountMenu}
+            anchor="right"
+            size="sm"
+            sx={{
+              '& .MuiDrawer-backdrop': { backdropFilter: 'none' },
+              '--Drawer-transitionDuration': openAccountMenu ? '0.3s' : 0,
+            }}
+          >
+            <ModalClose />
+            <DialogTitle>
+              &nbsp;
+            </DialogTitle>
+            <DialogContent>
+              <List>
+                <ListItem>
+                  <ListItemButton onClick={movePage('/api/auth/logout')}>
+                    ログアウト
+                  </ListItemButton>
+                </ListItem>
+              </List>
+            </DialogContent>
+          </Drawer>
         </Toolbar>
       </AppBar>
       <main>
