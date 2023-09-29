@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import NextLink from 'next/link';
 import { Link } from '@mui/joy';
+import { Box } from '@mui/material';
 
 export default function LoggedOut() {
   return (
@@ -11,7 +12,7 @@ export default function LoggedOut() {
         </title>
       </Head>
       <main>
-        <div>
+        <Box p={2}>
           <span>
             ログアウトしました。
           </span>
@@ -25,7 +26,7 @@ export default function LoggedOut() {
               ログイン
             </Link>
           </NextLink>
-        </div>
+        </Box>
       </main>
     </>
   );
