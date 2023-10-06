@@ -1,6 +1,7 @@
 import { ReactNode, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { useUser } from '@auth0/nextjs-auth0/client';
 import {
   DialogContent,
   DialogTitle,
@@ -26,6 +27,7 @@ export default function Layout({ children }: {
   children: ReactNode
 }) {
   const router = useRouter();
+  const { user } = useUser();
 
   const [openMenu, setOpenMenu] = useState(false);
   const [openAccountMenu, setOpenAccountMenu] = useState(false);
@@ -141,7 +143,7 @@ export default function Layout({ children }: {
           >
             <ModalClose />
             <DialogTitle>
-              &nbsp;
+              {user ? user.name : '&nbsp;'}
             </DialogTitle>
             <DialogContent>
               <List>
