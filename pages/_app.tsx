@@ -22,10 +22,8 @@ const joyTheme = joyExtendTheme({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { user } = pageProps;
-
   return (
-    <UserProvider user={user}>
+    <UserProvider>
       <MaterialCssVarsProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
         <JoyCssVarsProvider theme={joyTheme}>
           <CssBaseline />

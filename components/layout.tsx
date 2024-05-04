@@ -10,6 +10,7 @@ import {
   List,
   ListItem,
   ListItemButton,
+  ListItemDecorator,
   ModalClose,
   Typography,
 } from '@mui/joy';
@@ -19,7 +20,9 @@ import {
   Toolbar,
 } from '@mui/material';
 import {
-  AccountCircle,
+  AccountCircle as AccountCircleIcon,
+  AccountCircleOutlined as AccountCircleOutlinedIcon,
+  LogoutOutlined as LogoutOutlinedIcon,
   Menu as MenuIcon,
 } from '@mui/icons-material';
 
@@ -129,7 +132,7 @@ export default function Layout({ children }: {
               },
             }}
           >
-            <AccountCircle />
+            <AccountCircleIcon />
           </IconButton>
           <Drawer
             open={openAccountMenu}
@@ -148,7 +151,18 @@ export default function Layout({ children }: {
             <DialogContent>
               <List>
                 <ListItem>
+                  <ListItemButton onClick={movePage('/profile')}>
+                    <ListItemDecorator>
+                      <AccountCircleOutlinedIcon />
+                    </ListItemDecorator>
+                    プロフィール
+                  </ListItemButton>
+                </ListItem>
+                <ListItem>
                   <ListItemButton onClick={movePage('/api/auth/logout')}>
+                    <ListItemDecorator>
+                      <LogoutOutlinedIcon />
+                    </ListItemDecorator>
                     ログアウト
                   </ListItemButton>
                 </ListItem>
