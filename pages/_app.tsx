@@ -1,3 +1,4 @@
+import { createContext, useState } from 'react';
 import type { AppProps } from 'next/app';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { CssBaseline } from '@mui/material';
@@ -8,6 +9,21 @@ import {
 } from '@mui/material/styles';
 import { CssVarsProvider as JoyCssVarsProvider, extendTheme as joyExtendTheme } from '@mui/joy/styles';
 import '@fontsource-variable/noto-sans-jp';
+
+interface UserData {
+  name: string;
+  email: string;
+}
+
+interface UserContextType {
+  user: UserData | null;
+  setUser: (user: UserData) => void;
+}
+
+export const UserContext = createContext<UserContextType>({
+  user: null,
+  setUser: () => {},
+});
 
 const materialTheme = materialExtendTheme({
   typography: {
@@ -22,14 +38,18 @@ const joyTheme = joyExtendTheme({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [user, setUser] = useState<UserData | null>(null);
+
   return (
     <UserProvider>
-      <MaterialCssVarsProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
-        <JoyCssVarsProvider theme={joyTheme}>
-          <CssBaseline />
-          <Component {...pageProps} />
-        </JoyCssVarsProvider>
-      </MaterialCssVarsProvider>
+      <UserContext.Provider value={{ user, setUser }}>
+        <MaterialCssVarsProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
+          <JoyCssVarsProvider theme={joyTheme}>
+            <CssBaseline />
+            <Component {...pageProps} />
+          </JoyCssVarsProvider>
+        </MaterialCssVarsProvider>
+      </UserContext.Provider>
     </UserProvider>
   );
 }

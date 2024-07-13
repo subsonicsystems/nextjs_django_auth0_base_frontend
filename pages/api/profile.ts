@@ -11,7 +11,7 @@ export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiRespo
   const { accessToken } = await getAccessToken(req, res);
 
   try {
-    const response = await axios.postForm(`${process.env.API_URL}/update_profile`, req.body, {
+    const response = await axios.postForm(`${process.env.API_URL}/users/update_profile/`, req.body, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         'content-type': 'application/x-www-form-urlencoded',

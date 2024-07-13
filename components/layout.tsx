@@ -1,7 +1,8 @@
-import { ReactNode, useState } from 'react';
+import {
+  ReactNode, useContext, useEffect, useState,
+} from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useUser } from '@auth0/nextjs-auth0/client';
 import {
   DialogContent,
   DialogTitle,
@@ -12,6 +13,8 @@ import {
   ListItemButton,
   ListItemDecorator,
   ModalClose,
+  Snackbar,
+  SnackbarProps,
   Typography,
 } from '@mui/joy';
 import {
@@ -25,15 +28,34 @@ import {
   LogoutOutlined as LogoutOutlinedIcon,
   Menu as MenuIcon,
 } from '@mui/icons-material';
+import axios from 'axios';
+import { User } from '@/pages/api/getUser';
+import { UserContext } from '@/pages/_app';
 
 export default function Layout({ children }: {
   children: ReactNode
 }) {
   const router = useRouter();
-  const { user } = useUser();
+  const { user, setUser } = useContext(UserContext);
 
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [message, setMessage] = useState('');
+  const [snackbarColor, setSnackbarColor] = useState<SnackbarProps['color']>();
   const [openMenu, setOpenMenu] = useState(false);
   const [openAccountMenu, setOpenAccountMenu] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get<User>('/api/getUser')
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch(() => {
+        setMessage('情報を取得できませんでした。');
+        setSnackbarColor('danger');
+        setOpenSnackbar(true);
+      });
+  }, []);
 
   const clickOpenMenu = () => {
     setOpenMenu(true);
@@ -176,6 +198,19 @@ export default function Layout({ children }: {
           {children}
         </Box>
       </main>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        color={snackbarColor}
+        variant="soft"
+      >
+        {message}
+      </Snackbar>
     </>
   );
 }
