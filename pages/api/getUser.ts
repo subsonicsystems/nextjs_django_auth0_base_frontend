@@ -16,7 +16,7 @@ export default withApiAuthRequired(async (req: NextApiRequest, res: NextApiRespo
   const { accessToken } = await getAccessToken(req, res);
 
   try {
-    const response = await axios.get<User>(`${process.env.API_URL}/get_user`, {
+    const response = await axios.get<User>(`${process.env.API_URL}/users/get_user/`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
 

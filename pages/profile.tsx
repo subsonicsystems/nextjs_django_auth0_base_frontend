@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import {
   Box,
@@ -14,7 +14,7 @@ import {
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import axios from 'axios';
 import Layout from '@/components/layout';
-import { User } from '@/pages/api/getUser';
+import { UserContext } from '@/pages/_app';
 
 interface FormValues {
   name: string;
@@ -22,6 +22,8 @@ interface FormValues {
 }
 
 export default function Profile() {
+  const { user, setUser } = useContext(UserContext);
+
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [message, setMessage] = useState('');
   const [snackbarColor, setSnackbarColor] = useState<SnackbarProps['color']>();
@@ -36,20 +38,15 @@ export default function Profile() {
   });
 
   useEffect(() => {
-    axios
-      .get<User>('/api/getUser')
-      .then((res) => {
-        reset({
-          name: res.data.name,
-          email: res.data.email,
-        });
-      })
-      .catch(() => {
-        setMessage('情報を取得できませんでした。');
-        setSnackbarColor('danger');
-        setOpenSnackbar(true);
-      });
-  }, []);
+    if (!user) {
+      return;
+    }
+
+    reset({
+      name: user.name,
+      email: user.email,
+    });
+  }, [user]);
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     axios
@@ -58,6 +55,10 @@ export default function Profile() {
         email: data.email,
       })
       .then(() => {
+        setUser({
+          name: data.name,
+          email: data.email,
+        });
         setMessage('プロフィールを更新しました。');
         setSnackbarColor('success');
         setOpenSnackbar(true);
@@ -133,9 +134,7 @@ export default function Profile() {
               <Snackbar
                 open={openSnackbar}
                 autoHideDuration={6000}
-                onClose={() => {
-                  setOpenSnackbar(false);
-                }}
+                onClose={() => setOpenSnackbar(false)}
                 anchorOrigin={{
                   vertical: 'top',
                   horizontal: 'right',
