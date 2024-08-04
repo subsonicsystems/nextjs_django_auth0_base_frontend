@@ -17,7 +17,8 @@ import Layout from '@/components/layout';
 import { UserContext } from '@/pages/_app';
 
 interface FormValues {
-  name: string;
+  last_name: string;
+  first_name: string;
   email: string;
 }
 
@@ -32,7 +33,8 @@ export default function Profile() {
     control, reset, handleSubmit, formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
-      name: '',
+      last_name: '',
+      first_name: '',
       email: '',
     },
   });
@@ -43,7 +45,8 @@ export default function Profile() {
     }
 
     reset({
-      name: user.name,
+      last_name: user.last_name,
+      first_name: user.first_name,
       email: user.email,
     });
   }, [user]);
@@ -51,12 +54,14 @@ export default function Profile() {
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     axios
       .patch('/api/profile', {
-        name: data.name,
+        last_name: data.last_name,
+        first_name: data.first_name,
         email: data.email,
       })
       .then(() => {
         setUser({
-          name: data.name,
+          last_name: data.last_name,
+          first_name: data.first_name,
           email: data.email,
         });
         setMessage('プロフィールを更新しました。');
@@ -84,23 +89,46 @@ export default function Profile() {
             <Box>
               <Controller
                 control={control}
-                name="name"
+                name="last_name"
                 render={({ field }) => (
-                  <FormControl error={errors.name !== undefined}>
+                  <FormControl error={errors.last_name !== undefined}>
                     <FormLabel>
-                      氏名
+                      姓
                     </FormLabel>
                     <Input
                       {...field}
                       sx={{ width: 300 }}
                     />
                     <FormHelperText>
-                      {errors.name?.message}
+                      {errors.last_name?.message}
                     </FormHelperText>
                   </FormControl>
                 )}
                 rules={{
-                  required: '氏名を入力してください',
+                  required: '姓を入力してください',
+                }}
+              />
+            </Box>
+            <Box>
+              <Controller
+                control={control}
+                name="first_name"
+                render={({ field }) => (
+                  <FormControl error={errors.first_name !== undefined}>
+                    <FormLabel>
+                      名
+                    </FormLabel>
+                    <Input
+                      {...field}
+                      sx={{ width: 300 }}
+                    />
+                    <FormHelperText>
+                      {errors.first_name?.message}
+                    </FormHelperText>
+                  </FormControl>
+                )}
+                rules={{
+                  required: '名を入力してください',
                 }}
               />
             </Box>

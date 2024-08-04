@@ -3,7 +3,8 @@ import { getAccessToken, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import axios, { isAxiosError } from 'axios';
 
 export interface User {
-  name: string;
+  last_name: string;
+  first_name: string;
   email: string;
 }
 
