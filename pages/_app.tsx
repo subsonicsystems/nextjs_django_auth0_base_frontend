@@ -11,7 +11,8 @@ import { CssVarsProvider as JoyCssVarsProvider, extendTheme as joyExtendTheme } 
 import '@fontsource-variable/noto-sans-jp';
 
 interface UserData {
-  name: string;
+  last_name: string;
+  first_name: string;
   email: string;
 }
 

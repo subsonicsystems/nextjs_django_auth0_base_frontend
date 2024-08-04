@@ -168,7 +168,7 @@ export default function Layout({ children }: {
           >
             <ModalClose />
             <DialogTitle>
-              {user ? user.name : '&nbsp;'}
+              {user ? `${user.last_name} ${user.first_name}` : '&nbsp;'}
             </DialogTitle>
             <DialogContent>
               <List>
