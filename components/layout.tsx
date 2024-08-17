@@ -2,12 +2,15 @@ import {
   ReactNode, useContext, useEffect, useState,
 } from 'react';
 import Head from 'next/head';
+import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import {
+  Box,
   DialogContent,
   DialogTitle,
   Drawer,
   IconButton,
+  Link,
   List,
   ListItem,
   ListItemButton,
@@ -19,7 +22,6 @@ import {
 } from '@mui/joy';
 import {
   AppBar,
-  Box,
   Toolbar,
 } from '@mui/material';
 import {
@@ -136,14 +138,22 @@ export default function Layout({ children }: {
               </List>
             </DialogContent>
           </Drawer>
-          <Typography
-            level="title-lg"
-            textColor="#ffffff"
-            component="div"
-            sx={{ flexGrow: 1 }}
-          >
-            Nextjs Django Auth0 Base
-          </Typography>
+          <Box sx={{ flexGrow: 1 }}>
+            <NextLink
+              href="/"
+              passHref
+              legacyBehavior
+            >
+              <Link>
+                <Typography
+                  level="title-lg"
+                  textColor="#ffffff"
+                >
+                  Nextjs Django Auth0 Base
+                </Typography>
+              </Link>
+            </NextLink>
+          </Box>
           <IconButton
             onClick={clickOpenAccountMenu}
             sx={{
